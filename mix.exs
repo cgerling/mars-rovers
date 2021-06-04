@@ -22,6 +22,7 @@ defmodule MarsRovers.MixProject do
 
   defp deps do
     [
+      {:credo, "~> 1.5.5", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.1.0", only: [:dev], runtime: false}
     ]
   end
