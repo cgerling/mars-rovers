@@ -89,4 +89,46 @@ defmodule MarsRovers.RoverTest do
       assert turned_rover.y == rover.y
     end
   end
+
+  describe "move/1" do
+    test "returns a rover one step forward on x when heading east" do
+      rover = %Rover{x: 0, y: 0, heading: @east}
+
+      moved_rover = Rover.move(rover)
+
+      assert moved_rover.heading == rover.heading
+      assert moved_rover.x == rover.x + 1
+      assert moved_rover.y == rover.y
+    end
+
+    test "returns a rover one step forward on y when heading north" do
+      rover = %Rover{x: 0, y: 0, heading: @north}
+
+      moved_rover = Rover.move(rover)
+
+      assert moved_rover.heading == rover.heading
+      assert moved_rover.x == rover.x
+      assert moved_rover.y == rover.y + 1
+    end
+
+    test "returns a rover one step backward on y when heading south" do
+      rover = %Rover{x: 0, y: 0, heading: @south}
+
+      moved_rover = Rover.move(rover)
+
+      assert moved_rover.heading == rover.heading
+      assert moved_rover.x == rover.x
+      assert moved_rover.y == rover.y - 1
+    end
+
+    test "returns a rover one step backward on x when heading west" do
+      rover = %Rover{x: 0, y: 0, heading: @west}
+
+      moved_rover = Rover.move(rover)
+
+      assert moved_rover.heading == rover.heading
+      assert moved_rover.x == rover.x - 1
+      assert moved_rover.y == rover.y
+    end
+  end
 end
