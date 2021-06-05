@@ -24,4 +24,10 @@ defmodule MarsRovers.CardinalPoint do
 
   @spec west() :: west()
   def west, do: @west
+
+  @spec get_directions_for(t()) :: {t(), t()}
+  def get_directions_for(@east), do: {@north, @south}
+  def get_directions_for(@north), do: {@west, @east}
+  def get_directions_for(@south), do: {@east, @west}
+  def get_directions_for(@west), do: {@south, @north}
 end

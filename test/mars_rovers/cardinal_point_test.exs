@@ -26,4 +26,27 @@ defmodule MarsRovers.CardinalPointTest do
       assert :west == CardinalPoint.west()
     end
   end
+
+  describe "get_directions_for/1" do
+    @east CardinalPoint.east()
+    @north CardinalPoint.north()
+    @south CardinalPoint.south()
+    @west CardinalPoint.west()
+
+    test "returns north and south when cardinal point is east" do
+      assert {@north, @south} == CardinalPoint.get_directions_for(@east)
+    end
+
+    test "returns west and east when cardinal point is north" do
+      assert {@west, @east} == CardinalPoint.get_directions_for(@north)
+    end
+
+    test "returns east and west when cardinal point is south" do
+      assert {@east, @west} == CardinalPoint.get_directions_for(@south)
+    end
+
+    test "returns south and north when cardinal point is west" do
+      assert {@south, @north} == CardinalPoint.get_directions_for(@west)
+    end
+  end
 end
