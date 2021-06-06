@@ -49,4 +49,22 @@ defmodule MarsRovers.CardinalPointTest do
       assert {@south, @north} == CardinalPoint.get_directions_for(@west)
     end
   end
+
+  describe "from_string/1" do
+    test "returns atom east when the given string is E" do
+      assert @east == CardinalPoint.from_string("E")
+    end
+
+    test "returns atom north when the given string is N" do
+      assert @north == CardinalPoint.from_string("N")
+    end
+
+    test "returns atom south when the given string is S" do
+      assert @south == CardinalPoint.from_string("S")
+    end
+
+    test "returns atom west when the given string is W" do
+      assert @west == CardinalPoint.from_string("W")
+    end
+  end
 end

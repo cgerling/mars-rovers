@@ -30,4 +30,10 @@ defmodule MarsRovers.CardinalPoint do
   def get_directions_for(@north), do: {@west, @east}
   def get_directions_for(@south), do: {@east, @west}
   def get_directions_for(@west), do: {@south, @north}
+
+  @spec from_string(String.t()) :: t()
+  def from_string("E"), do: @east
+  def from_string("N"), do: @north
+  def from_string("S"), do: @south
+  def from_string("W"), do: @west
 end
