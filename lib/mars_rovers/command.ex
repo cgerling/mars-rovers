@@ -21,4 +21,9 @@ defmodule MarsRovers.Command do
 
   @spec right() :: right()
   def right, do: @right
+
+  @spec from_string(String.t()) :: t()
+  def from_string("M"), do: @move
+  def from_string("L"), do: @left
+  def from_string("R"), do: @right
 end
