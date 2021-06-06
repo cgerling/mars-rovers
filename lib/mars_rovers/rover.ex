@@ -51,4 +51,9 @@ defmodule MarsRovers.Rover do
   def move(%__MODULE__{heading: @west, x: x} = rover) do
     %{rover | x: x - 1}
   end
+
+  @spec to_string(t()) :: String.t()
+  def to_string(%__MODULE__{heading: heading, x: x, y: y}) do
+    "#{x} #{y} #{CardinalPoint.to_string(heading)}"
+  end
 end

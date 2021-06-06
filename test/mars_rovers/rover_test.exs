@@ -131,4 +131,12 @@ defmodule MarsRovers.RoverTest do
       assert moved_rover.y == rover.y
     end
   end
+
+  describe "to_string/1" do
+    test "returns a string with the rover's coordinates and heading direction" do
+      rover = %Rover{x: 0, y: 0, heading: @north}
+
+      assert "0 0 N" == Rover.to_string(rover)
+    end
+  end
 end
