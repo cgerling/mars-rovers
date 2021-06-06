@@ -36,4 +36,10 @@ defmodule MarsRovers.CardinalPoint do
   def from_string("N"), do: @north
   def from_string("S"), do: @south
   def from_string("W"), do: @west
+
+  @spec to_string(t()) :: String.t()
+  def to_string(@east), do: "E"
+  def to_string(@north), do: "N"
+  def to_string(@south), do: "S"
+  def to_string(@west), do: "W"
 end

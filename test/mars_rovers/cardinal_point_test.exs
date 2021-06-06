@@ -3,6 +3,11 @@ defmodule MarsRovers.CardinalPointTest do
 
   alias MarsRovers.CardinalPoint
 
+  @east CardinalPoint.east()
+  @north CardinalPoint.north()
+  @south CardinalPoint.south()
+  @west CardinalPoint.west()
+
   describe "east/0" do
     test "returns atom east" do
       assert :east == CardinalPoint.east()
@@ -28,11 +33,6 @@ defmodule MarsRovers.CardinalPointTest do
   end
 
   describe "get_directions_for/1" do
-    @east CardinalPoint.east()
-    @north CardinalPoint.north()
-    @south CardinalPoint.south()
-    @west CardinalPoint.west()
-
     test "returns north and south when cardinal point is east" do
       assert {@north, @south} == CardinalPoint.get_directions_for(@east)
     end
@@ -65,6 +65,24 @@ defmodule MarsRovers.CardinalPointTest do
 
     test "returns atom west when the given string is W" do
       assert @west == CardinalPoint.from_string("W")
+    end
+  end
+
+  describe "to_string/1" do
+    test "returns string E when cardinal point is east" do
+      assert "E" == CardinalPoint.to_string(@east)
+    end
+
+    test "returns string N when cardinal point is north" do
+      assert "N" == CardinalPoint.to_string(@north)
+    end
+
+    test "returns string S when cardinal point is south" do
+      assert "S" == CardinalPoint.to_string(@south)
+    end
+
+    test "returns string W when cardinal point is west" do
+      assert "W" == CardinalPoint.to_string(@west)
     end
   end
 end
