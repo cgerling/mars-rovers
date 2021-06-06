@@ -4,7 +4,7 @@ defmodule MarsRovers.Rover do
   @enforce_keys [:heading, :x, :y]
   defstruct [:heading, :x, :y]
 
-  alias MarsRovers.{CardinalPoint, Direction}
+  alias MarsRovers.{CardinalPoint, Direction, Plateau}
 
   @type t :: %__MODULE__{
           heading: CardinalPoint.t(),
@@ -56,4 +56,8 @@ defmodule MarsRovers.Rover do
   def to_string(%__MODULE__{heading: heading, x: x, y: y}) do
     "#{x} #{y} #{CardinalPoint.to_string(heading)}"
   end
+
+  @spec is_outside_of?(t(), Plateau.t()) :: bool()
+  def is_outside_of?(%__MODULE__{} = rover, %Plateau{} = plateau),
+    do: rover.x > plateau.width or rover.y > plateau.height
 end

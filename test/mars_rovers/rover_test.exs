@@ -1,7 +1,7 @@
 defmodule MarsRovers.RoverTest do
   use ExUnit.Case, async: true
 
-  alias MarsRovers.{CardinalPoint, Rover}
+  alias MarsRovers.{CardinalPoint, Plateau, Rover}
 
   @east CardinalPoint.east()
   @north CardinalPoint.north()
@@ -137,6 +137,36 @@ defmodule MarsRovers.RoverTest do
       rover = %Rover{x: 0, y: 0, heading: @north}
 
       assert "0 0 N" == Rover.to_string(rover)
+    end
+  end
+
+  describe "is_outside_of?/2" do
+    test "returns true when rover x coordinates is bigger than the plateau dimesions" do
+      rover = %Rover{heading: @north, x: 11, y: 1}
+      plateau = %Plateau{height: 10, width: 10}
+
+      assert true == Rover.is_outside_of?(rover, plateau)
+    end
+
+    test "returns true when rover y coordinates is bigger than the plateau dimesions" do
+      rover = %Rover{heading: @north, x: 1, y: 11}
+      plateau = %Plateau{height: 10, width: 10}
+
+      assert true == Rover.is_outside_of?(rover, plateau)
+    end
+
+    test "returns false when rover coordinates are less than the plateau dimensions" do
+      rover = %Rover{heading: @north, x: 5, y: 5}
+      plateau = %Plateau{height: 10, width: 10}
+
+      assert false == Rover.is_outside_of?(rover, plateau)
+    end
+
+    test "returns false when rover coordinates are equals to the plateau dimensions" do
+      rover = %Rover{heading: @north, x: 10, y: 10}
+      plateau = %Plateau{height: 10, width: 10}
+
+      assert false == Rover.is_outside_of?(rover, plateau)
     end
   end
 end
