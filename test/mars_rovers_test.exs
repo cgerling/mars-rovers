@@ -27,5 +27,31 @@ defmodule MarsRoversTest do
 
       assert rovers_position == MarsRovers.deploy(deploy_instructions)
     end
+
+    test "returns a string with the rover's final position as fallen when the rover walked over the plateau boundaries" do
+      deploy_instructions = """
+      5 5
+      1 2 N
+      MMMM
+      """
+
+      rover_position = "<fallen>"
+
+      assert rover_position == MarsRovers.deploy(deploy_instructions)
+    end
+
+    test "returns a string with the rover's final position as crashed when the rover is in the same position as another rover" do
+      deploy_instructions = """
+      5 5
+      1 2 N
+      RMMM
+      4 0 E
+      LMM
+      """
+
+      rover_position = "<crashed>\n<crashed>"
+
+      assert rover_position == MarsRovers.deploy(deploy_instructions)
+    end
   end
 end
