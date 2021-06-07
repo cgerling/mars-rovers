@@ -1,6 +1,8 @@
 defmodule MarsRovers.CardinalPoint do
   @moduledoc false
 
+  alias MarsRovers.Direction
+
   @type east :: :east
   @type north :: :north
   @type south :: :south
@@ -12,6 +14,9 @@ defmodule MarsRovers.CardinalPoint do
   @north :north
   @south :south
   @west :west
+
+  @left Direction.left()
+  @right Direction.right()
 
   @spec east() :: east()
   def east, do: @east
@@ -25,11 +30,11 @@ defmodule MarsRovers.CardinalPoint do
   @spec west() :: west()
   def west, do: @west
 
-  @spec get_directions_for(t()) :: {t(), t()}
-  def get_directions_for(@east), do: {@north, @south}
-  def get_directions_for(@north), do: {@west, @east}
-  def get_directions_for(@south), do: {@east, @west}
-  def get_directions_for(@west), do: {@south, @north}
+  @spec get_directions_for(t()) :: %{left: t(), right: t()}
+  def get_directions_for(@east), do: %{@left => @north, @right => @south}
+  def get_directions_for(@north), do: %{@left => @west, @right => @east}
+  def get_directions_for(@south), do: %{@left => @east, @right => @west}
+  def get_directions_for(@west), do: %{@left => @south, @right => @north}
 
   @spec from_string(String.t()) :: t()
   def from_string("E"), do: @east

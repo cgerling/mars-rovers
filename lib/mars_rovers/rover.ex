@@ -12,9 +12,6 @@ defmodule MarsRovers.Rover do
           y: integer()
         }
 
-  @left Direction.left()
-  @right Direction.right()
-
   @east CardinalPoint.east()
   @north CardinalPoint.north()
   @south CardinalPoint.south()
@@ -22,18 +19,13 @@ defmodule MarsRovers.Rover do
 
   @spec turn(%__MODULE__{}, Direction.t()) :: %__MODULE__{}
   def turn(%__MODULE__{} = rover, direction) do
-    direction_ordinal = convert_direction_to_ordinal(direction)
-
     heading =
       rover.heading
       |> CardinalPoint.get_directions_for()
-      |> elem(direction_ordinal)
+      |> Map.get(direction)
 
     %{rover | heading: heading}
   end
-
-  defp convert_direction_to_ordinal(@left), do: 0
-  defp convert_direction_to_ordinal(@right), do: 1
 
   @spec move(t()) :: t()
   def move(%__MODULE__{heading: @east, x: x} = rover) do
