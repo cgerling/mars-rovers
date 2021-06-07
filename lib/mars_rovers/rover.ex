@@ -60,4 +60,9 @@ defmodule MarsRovers.Rover do
   @spec is_outside_of?(t(), Plateau.t()) :: bool()
   def is_outside_of?(%__MODULE__{} = rover, %Plateau{} = plateau),
     do: rover.x > plateau.width or rover.y > plateau.height
+
+  @spec has_crashed_within?(t(), list(t())) :: bool()
+  def has_crashed_within?(%__MODULE__{x: x, y: y}, squad) when is_list(squad) do
+    Enum.count(squad, &(&1.x == x and &1.y == y)) > 1
+  end
 end

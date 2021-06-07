@@ -169,4 +169,32 @@ defmodule MarsRovers.RoverTest do
       assert false == Rover.is_outside_of?(rover, plateau)
     end
   end
+
+  describe "has_crashed_within?/2" do
+    test "returns true when rover have duplicated coordinates within the squad" do
+      rover = %Rover{heading: :nort, x: 1, y: 1}
+      another_rover = %Rover{rover | heading: @east}
+
+      squad = [rover, another_rover]
+
+      assert true == Rover.has_crashed_within?(rover, squad)
+    end
+
+    test "returns false when rover have unique coordinates within the squad" do
+      rover = %Rover{heading: :nort, x: 1, y: 1}
+      another_rover = %Rover{heading: @north, x: 2, y: 0}
+
+      squad = [rover, another_rover]
+
+      assert false == Rover.has_crashed_within?(rover, squad)
+    end
+
+    test "returns false when squad have a single rover" do
+      rover = %Rover{heading: @north, x: 1, y: 1}
+
+      squad = [rover]
+
+      assert false == Rover.has_crashed_within?(rover, squad)
+    end
+  end
 end
