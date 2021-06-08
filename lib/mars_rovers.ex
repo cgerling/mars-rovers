@@ -3,6 +3,7 @@ defmodule MarsRovers do
 
   alias MarsRovers.{Commander, Parser, Plateau, Rover}
 
+  @spec deploy(String.t()) :: String.t()
   def deploy(deploy_instructions) do
     {plateau, rovers_with_commands} = Parser.parse_deploy_instructions(deploy_instructions)
 

@@ -7,6 +7,7 @@ defmodule MarsRovers.Commander do
   @move Command.move()
   @right Command.right()
 
+  @spec command_rover(Rover.t(), list(Command.t())) :: Rover.t()
   def command_rover(%Rover{} = rover, commands) when is_list(commands) do
     Enum.reduce(commands, rover, &execute_command/2)
   end
