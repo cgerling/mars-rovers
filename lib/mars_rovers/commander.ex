@@ -3,11 +3,13 @@ defmodule MarsRovers.Commander do
 
   alias MarsRovers.{Command, Direction, Rover}
 
+  @type rover_with_commands :: {Rover.t(), list(Command.t())}
+
   @left Command.left()
   @move Command.move()
   @right Command.right()
 
-  @spec command_squad(list()) :: list()
+  @spec command_squad(list(rover_with_commands)) :: list(Rover.t())
   def command_squad(squad) when is_list(squad) do
     Enum.map(squad, fn {rover, commands} -> command_rover(rover, commands) end)
   end

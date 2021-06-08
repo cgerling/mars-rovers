@@ -1,11 +1,10 @@
 defmodule MarsRovers.Parser do
   @moduledoc false
 
-  alias MarsRovers.{CardinalPoint, Command, Plateau, Rover}
+  alias MarsRovers.{CardinalPoint, Command, Commander, Plateau, Rover}
 
-  @type rover_with_commands :: {Rover.t(), list(Command.t())}
-
-  @spec parse_deploy_instructions(String.t()) :: {Plateau.t(), list(rover_with_commands)}
+  @spec parse_deploy_instructions(String.t()) ::
+          {Plateau.t(), list(Commander.rover_with_commands())}
   def parse_deploy_instructions(instructions) when is_binary(instructions) do
     [plateau_information | squad_information] = String.split(instructions, "\n", trim: true)
 
