@@ -5,17 +5,13 @@ defmodule MarsRovers do
 
   @spec deploy(String.t()) :: String.t()
   def deploy(deploy_instructions) do
-    {plateau, rovers_with_commands} = Parser.parse_deploy_instructions(deploy_instructions)
+    {plateau, squad_with_commands} = Parser.parse_deploy_instructions(deploy_instructions)
 
-    squad_final_position = Enum.map(rovers_with_commands, &command_rover/1)
+    squad = Commander.command_squad(squad_with_commands)
 
-    squad_final_position
-    |> Enum.map(&get_rover_status(&1, plateau, squad_final_position))
+    squad
+    |> Enum.map(&get_rover_status(&1, plateau, squad))
     |> Enum.join("\n")
-  end
-
-  defp command_rover({%Rover{} = rover, commands}) when is_list(commands) do
-    Commander.command_rover(rover, commands)
   end
 
   defp get_rover_status(%Rover{} = rover, %Plateau{} = plateau, squad) when is_list(squad) do
