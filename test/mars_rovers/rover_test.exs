@@ -197,4 +197,32 @@ defmodule MarsRovers.RoverTest do
       assert false == Rover.has_crashed_within?(rover, squad)
     end
   end
+
+  describe "fetch_status/3" do
+    test "returns online when no problem was detected" do
+      rover = %Rover{heading: @north, x: 0, y: 0}
+      squad = [rover]
+      plateau = %Plateau{height: 5, width: 5}
+
+      assert "online" == Rover.fetch_status(rover, plateau, squad)
+    end
+
+    test "returns out of range when rover is out of the plateau boundaries" do
+      rover = %Rover{heading: @north, x: 6, y: 0}
+      squad = [rover]
+      plateau = %Plateau{height: 5, width: 5}
+
+      assert "out of range" == Rover.fetch_status(rover, plateau, squad)
+    end
+
+    test "returns crashed when the rover is in the same coordinates of another rover from the squad" do
+      rover_a = %Rover{heading: @north, x: 1, y: 3}
+      rover_b = %Rover{heading: @south, x: 1, y: 3}
+      squad = [rover_a, rover_b]
+      plateau = %Plateau{height: 5, width: 5}
+
+      assert "crashed" == Rover.fetch_status(rover_a, plateau, squad)
+      assert "crashed" == Rover.fetch_status(rover_b, plateau, squad)
+    end
+  end
 end

@@ -57,4 +57,18 @@ defmodule MarsRovers.Rover do
   def has_crashed_within?(%__MODULE__{x: x, y: y}, squad) when is_list(squad) do
     Enum.count(squad, &(&1.x == x and &1.y == y)) > 1
   end
+
+  @spec fetch_status(t(), Plateau.t(), list(t())) :: String.t()
+  def fetch_status(%__MODULE__{} = rover, %Plateau{} = plateau, squad) when is_list(squad) do
+    cond do
+      is_outside_of?(rover, plateau) ->
+        "out of range"
+
+      has_crashed_within?(rover, squad) ->
+        "crashed"
+
+      true ->
+        "online"
+    end
+  end
 end
