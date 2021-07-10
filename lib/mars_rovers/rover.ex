@@ -44,8 +44,8 @@ defmodule MarsRovers.Rover do
     %{rover | x: x - 1}
   end
 
-  @spec to_string(t()) :: String.t()
-  def to_string(%__MODULE__{heading: heading, x: x, y: y}) do
+  @spec to_coordinates(t()) :: String.t()
+  def to_coordinates(%__MODULE__{heading: heading, x: x, y: y}) do
     "#{x} #{y} #{CardinalPoint.to_string(heading)}"
   end
 
