@@ -15,15 +15,18 @@ defmodule MarsRovers do
   end
 
   defp get_rover_status(%Rover{} = rover, %Plateau{} = plateau, squad) when is_list(squad) do
-    cond do
-      Rover.is_outside_of?(rover, plateau) ->
-        "<fallen>"
+    status =
+      cond do
+        Rover.is_outside_of?(rover, plateau) ->
+          "out of range"
 
-      Rover.has_crashed_within?(rover, squad) ->
-        "<crashed>"
+        Rover.has_crashed_within?(rover, squad) ->
+          "crashed"
 
-      true ->
-        Rover.to_string(rover)
-    end
+        true ->
+          "online"
+      end
+
+    "#{Rover.to_coordinates(rover)} (#{status})"
   end
 end

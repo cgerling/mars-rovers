@@ -9,9 +9,9 @@ defmodule MarsRoversTest do
       LMLMLMLMM
       """
 
-      rover_position = "1 3 N"
+      squad_status = "1 3 N (online)"
 
-      assert rover_position == MarsRovers.deploy(deploy_instructions)
+      assert squad_status == MarsRovers.deploy(deploy_instructions)
     end
 
     test "returns a multiline string with the final position of each rover in the same order of the instructions" do
@@ -23,9 +23,9 @@ defmodule MarsRoversTest do
       MMRMMRMRRM
       """
 
-      rovers_position = "1 3 N\n5 1 E"
+      squad_status = "1 3 N (online)\n5 1 E (online)"
 
-      assert rovers_position == MarsRovers.deploy(deploy_instructions)
+      assert squad_status == MarsRovers.deploy(deploy_instructions)
     end
 
     test "returns a string with the rover's final position as fallen when the rover walked over the plateau boundaries" do
@@ -35,9 +35,9 @@ defmodule MarsRoversTest do
       MMMM
       """
 
-      rover_position = "<fallen>"
+      squad_status = "1 6 N (out of range)"
 
-      assert rover_position == MarsRovers.deploy(deploy_instructions)
+      assert squad_status == MarsRovers.deploy(deploy_instructions)
     end
 
     test "returns a string with the rover's final position as crashed when the rover is in the same position as another rover" do
@@ -49,9 +49,9 @@ defmodule MarsRoversTest do
       LMM
       """
 
-      rover_position = "<crashed>\n<crashed>"
+      squad_status = "4 2 E (crashed)\n4 2 N (crashed)"
 
-      assert rover_position == MarsRovers.deploy(deploy_instructions)
+      assert squad_status == MarsRovers.deploy(deploy_instructions)
     end
   end
 end
